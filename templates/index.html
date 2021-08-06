@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+
+      #form
+      {
+        padding-top: 2px;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        border: solid black 1px;
+      }
+
+      #middle
+      {
+        border-left: solid black 1px;
+        border-right: solid black 1px;
+      }
+      
+      /* #new
+      {
+        text-align: center;
+      } */
+
+      .my_container
+      {
+          height: 200px;
+          position: relative;
+      }
+
+      .center
+      {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100px;
+          margin: 50px;
+          padding: 50px;
+
+          
+      }
+
+      #button
+      {
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        background-color: blue;
+
+      }
+
+      #new_button
+      {
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        background-color: blue;
+      }
+
+    </style>
+
+  
+    <!-- Required meta tags -->
+      <meta name="csrf_token" content="{{ csrf_token }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Text to Speech</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+
+    <div class="container" id = "form" style="margin-top: 20px;">
+      <div class="row">
+        <div class="col">
+          <form method="post" action="/words/">
+            {% csrf_token %}
+               <div class="form-group">
+                   <label for="text">Enter Text</label>
+                   <textarea class="form-control row-auto col-auto" id="exampleFormControlTextarea1" name="text" style = "width: 500x; height: 100px;"></textarea>
+               </div>
+                 <button class="btn btn-primary my-4" name="repeat">Submit</button>
+                 
+             </form>
+        </div>
+        <div class="col" id = "middle">
+          <form enctype="multipart/form-data" action = "/files/" method="POST" name="file">
+            {% csrf_token %}  
+            <div class="form-group">
+              <label for="exampleFormControlFile1">File Input</label><br><br>
+              <input type="file" class="form-control-file my-3" id="exampleFormControlFile1" name="file"><br><br>
+              <button type="submit" class="btn btn-primary my-1" name="repeat">Submit File</button>
+            </div>
+          </form>  
+        </div>
+        <div class="col">
+          <i class="fas fa-microphone-alt"></i>
+          <p>{{text}}</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="center">
+    <form action="/file/" method="POST">
+      {% csrf_token %}
+      <select name="file"><br>
+        <option>Choose a File</option>
+        {% for items in user_files %}
+        <option>{{items}}</option>
+        {% endfor %}
+      </select><br><br><br><br>
+      <input type="submit" value="File Submit" id = "new_button">
+    </form>
+    </div>
+    <!-- Content -->
+    <form action="/signout/" method="POST">
+      {% csrf_token %}
+      <div class="my_container">
+          <div class="center">
+              <input type="submit" value="Logout" id = "button" id="submit">
+          </div>
+      </div>    
+  
+
+  </body>
+</html>
