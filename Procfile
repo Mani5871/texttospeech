@@ -1,1 +1,1 @@
-web: gunicorn texttospeech.wsgi
+web: gunicorn texttospeech.wsgi --log-file -

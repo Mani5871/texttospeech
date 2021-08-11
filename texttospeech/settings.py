@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-jm9bt8mp(&#-xp#4b6$$(ahnzqcj8gpwbb-av!$+u5vsbgt+11'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://text-to-speech-mani.herokuapp.com/', '127.0.0.1']
 
 
 # Application definition
